@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Score Test</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #1a1f2e; color: #fff; }
+        .container { max-width: 900px; margin: 0 auto; }
+        button { padding: 15px 30px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); border: none; color: white; font-size: 16px; border-radius: 8px; cursor: pointer; }
+        button:hover { opacity: 0.9; }
+        .results { margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px; }
+        .score { font-size: 48px; font-weight: bold; margin: 20px 0; }
+        .skill { display: inline-block; padding: 8px 16px; background: rgba(134, 239, 172, 0.2); border-radius: 20px; margin: 5px; color: #86efac; }
+        .section { margin: 20px 0; }
+        h2 { color: #60a5fa; }
+        .loading { text-align: center; padding: 40px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Resume Score Analyzer</h1>
+        <button onclick="analyzeResume()">Analyze Sample Resume</button>
+        
+        <div id="results"></div>
+    </div>
+
+    <script>
+        async function analyzeResume() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="loading">⏳ Analyzing resume...</div>';
+
+            const payload = {
+                userId: "john-doe",
+                personalInfo: {
+                    name: "John Doe",
+                    email: "john.doe@email.com",
+                    phone: "+1-555-123-4567",
+                    location: "San Francisco, CA"
+                },
+                professionalSummary: "Results-driven Full Stack Software Engineer with 5+ years of experience in developing scalable web applications and microservices. Proven expertise in Java, Spring Boot, React, and cloud technologies.",
+                skills: ["Java", "JavaScript", "TypeScript", "Python", "SQL", "React", "Angular", "Vue.js", "HTML5", "CSS3", "Spring Boot", "Node.js", "Express", "Django", "PostgreSQL", "MySQL", "MongoDB", "Redis", "AWS", "Docker", "Kubernetes", "Jenkins", "CI/CD", "Git", "Maven", "JUnit", "TestNG", "Jest", "Selenium", "Agile", "Scrum"],
+                education: [{
+                    institution: "University of California, Berkeley",
+                    degree: "Bachelor of Science",
+                    field: "Computer Science",
+                    startDate: "August 2014",
+                    endDate: "May 2018",
+                    gpa: "3.8/4.0"
+                }],
+                experience: [{
+                    company: "TechCorp Inc.",
+                    position: "Senior Software Engineer",
+                    startDate: "January 2022",
+                    endDate: "Present",
+                    current: true,
+                    description: [
+                        "Architected and developed a microservices-based e-commerce platform using Spring Boot and React",
+                        "Implemented automated CI/CD pipelines using Jenkins and Docker, reducing deployment time by 60%",
+                        "Led a team of 5 engineers to migrate legacy monolithic application to cloud-native architecture",
+                        "Optimized database queries and implemented Redis caching, improving response time by 45%",
+                        "Designed and implemented RESTful APIs consumed by web and mobile applications"
+                    ]
+                }],
+                projects: [{
+                    name: "E-Commerce Microservices Platform",
+                    description: "Built scalable e-commerce platform using Spring Boot microservices",
+                    technologies: ["Java", "Spring Boot", "Docker", "Kubernetes", "PostgreSQL", "Redis"],
+                    link: "github.com/johndoe/project"
+                }],
+                certifications: [
+                    "AWS Certified Solutions Architect - Associate (2023)",
+                    "Oracle Certified Professional: Java SE 11 Developer (2022)",
+                    "Certified Kubernetes Administrator (CKA) (2021)"
+                ],
+                areasOfInterest: ["Cloud Computing", "Machine Learning", "Software Architecture", "DevOps"],
+                rawText: "Full resume text here with all sections..."
+            };
+
+            try {
+                const response = await fetch('http://localhost:8080/api/resume-score', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                const scoreColor = data.overallScore >= 80 ? '#86efac' : data.overallScore >= 60 ? '#fde047' : '#fca5a5';
+                
+                resultsDiv.innerHTML = `
+                    <div class="results">
+                        <h2>📄 Resume Analysis Results</h2>
+                        <p><strong>Resume ID:</strong> ${data.resumeId}</p>
+                        
+                        <div class="score" style="color: ${scoreColor}">${data.overallScore.toFixed(1)}/100</div>
+                        
+                        <div class="section">
+                            <h3>📈 Detailed Scores</h3>
+                            <p><strong>ATS Score:</strong> ${data.atsScore.toFixed(1)}/100</p>
+                            <p><strong>Keyword Match:</strong> ${data.keywordMatchScore.toFixed(1)}/100</p>
+                            <p><strong>Format Score:</strong> ${data.formatScore.toFixed(1)}/100</p>
+                        </div>
+
+                        <div class="section">
+                            <h3>🎯 Extracted Skills (${data.extractedSkills.length})</h3>
+                            <div>
+                                ${data.extractedSkills.map(skill => `<span class="skill">${skill}</span>`).join('')}
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3>✅ Section Completeness</h3>
+                            ${Object.entries(data.sectionCompleteness).map(([key, value]) => 
+                                `<p>${value ? '✓' : '✗'} ${key}</p>`
+                            ).join('')}
+                        </div>
+
+                        <div class="section">
+                            <h3>💡 Improvement Suggestions</h3>
+                            <ol>
+                                ${data.suggestions.map(s => `<li>${s}</li>`).join('')}
+                            </ol>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="results"><p style="color: #fca5a5;">Error: ${error.message}</p></div>`;
+            }
+        }
+    </script>
+</body>
+</html>

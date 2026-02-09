@@ -1,0 +1,94 @@
+JOHN DOE
+Software Engineer
+
+Contact Information:
+Email: john.doe@email.com
+Phone: +1-555-123-4567
+LinkedIn: linkedin.com/in/johndoe
+GitHub: github.com/johndoe
+Location: San Francisco, CA
+
+PROFESSIONAL SUMMARY
+
+Results-driven Full Stack Software Engineer with 5+ years of experience in developing scalable web applications and microservices. Proven expertise in Java, Spring Boot, React, and cloud technologies. Led multiple cross-functional teams to deliver high-impact projects. Passionate about clean code, system design, and continuous learning.
+
+TECHNICAL SKILLS
+
+Programming Languages: Java, JavaScript, TypeScript, Python, SQL
+Frontend Technologies: React, Angular, Vue.js, HTML5, CSS3, Redux, Webpack
+Backend Technologies: Spring Boot, Node.js, Express, Django, Flask, REST API, GraphQL
+Databases: PostgreSQL, MySQL, MongoDB, Redis, Oracle
+Cloud & DevOps: AWS (EC2, S3, Lambda, RDS), Docker, Kubernetes, Jenkins, CI/CD, Git
+Tools & Frameworks: Maven, Gradle, JUnit, TestNG, Jest, Selenium, Agile, Scrum
+
+PROFESSIONAL EXPERIENCE
+
+Senior Software Engineer | TechCorp Inc. | San Francisco, CA
+January 2022 - Present
+
+• Architected and developed a microservices-based e-commerce platform using Spring Boot and React, serving 2M+ users
+• Implemented automated CI/CD pipelines using Jenkins and Docker, reducing deployment time by 60%
+• Led a team of 5 engineers to migrate legacy monolithic application to cloud-native architecture on AWS
+• Optimized database queries and implemented Redis caching, improving application response time by 45%
+• Designed and implemented RESTful APIs consumed by web and mobile applications
+• Collaborated with product managers and UX designers to deliver features aligned with business objectives
+• Mentored junior developers on best practices, code reviews, and architectural decisions
+
+Software Engineer | InnovateSoft Solutions | San Jose, CA
+June 2019 - December 2021
+
+• Developed full-stack features for SaaS platform using Java Spring Boot and Angular
+• Built real-time data processing pipeline using Apache Kafka and Spring Cloud Stream
+• Implemented comprehensive unit and integration tests, achieving 85% code coverage
+• Troubleshooted and debugged production issues, reducing critical incidents by 40%
+• Participated in Agile ceremonies including sprint planning, daily standups, and retrospectives
+• Integrated third-party APIs for payment processing and analytics
+• Managed database schemas and wrote complex SQL queries for reporting features
+
+Junior Developer | StartupHub | Palo Alto, CA
+August 2018 - May 2019
+
+• Developed responsive web applications using HTML, CSS, JavaScript, and React
+• Created REST APIs using Node.js and Express for mobile app backend
+• Collaborated with QA team to identify and fix bugs across the application
+• Participated in code reviews and implemented feedback to improve code quality
+• Documented technical specifications and API documentation
+
+EDUCATION
+
+Bachelor of Science in Computer Science | University of California, Berkeley
+August 2014 - May 2018
+GPA: 3.8/4.0
+Relevant Coursework: Data Structures, Algorithms, Database Systems, Operating Systems, Software Engineering
+
+PROJECTS
+
+E-Commerce Microservices Platform
+• Built a scalable e-commerce platform using Spring Boot microservices architecture
+• Implemented service discovery with Eureka, API Gateway with Zuul, and distributed tracing
+• Technologies: Java, Spring Boot, Spring Cloud, Docker, Kubernetes, PostgreSQL, Redis
+• GitHub: github.com/johndoe/ecommerce-microservices
+
+Real-Time Chat Application
+• Developed real-time chat application with WebSocket support and message persistence
+• Implemented user authentication, group chats, and file sharing functionality
+• Technologies: React, Node.js, Socket.io, MongoDB, JWT, AWS S3
+• GitHub: github.com/johndoe/realtime-chat
+
+Machine Learning Price Predictor
+• Created ML model to predict housing prices using regression algorithms
+• Built REST API to serve predictions and deployed on AWS Lambda
+• Technologies: Python, scikit-learn, Flask, Pandas, NumPy, AWS Lambda
+
+CERTIFICATIONS
+
+• AWS Certified Solutions Architect - Associate (2023)
+• Oracle Certified Professional: Java SE 11 Developer (2022)
+• Certified Kubernetes Administrator (CKA) (2021)
+
+AREAS OF INTEREST
+
+• Cloud Computing & Distributed Systems
+• Machine Learning & Artificial Intelligence
+• Software Architecture & Design Patterns
+• DevOps & Site Reliability Engineering
