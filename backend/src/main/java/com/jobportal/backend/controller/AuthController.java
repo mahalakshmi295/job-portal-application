@@ -2,6 +2,8 @@ package com.jobportal.backend.controller;
 
 import com.jobportal.backend.service.EmailService;
 import com.jobportal.backend.service.OTPService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +13,12 @@ import java.util.*;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-    
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
     @Autowired
     private OTPService otpService;
-    
+
     @Autowired
     private EmailService emailService;
     
@@ -38,16 +42,13 @@ public class AuthController {
             result.put("otpSent", true);
             result.put("message", "OTP sent to your email. Valid for 5 minutes.");
             result.put("email", email);
-            
-            // For development/testing, also return OTP in response (REMOVE IN PRODUCTION!)
-            if (System.getenv("ENVIRONMENT") == null || "development".equals(System.getenv("ENVIRONMENT"))) {
-                result.put("otp", otp); // Only for testing
-            }
-            
+
+            // OTP is only sent via email for security (check server logs for development testing)
+
             return ResponseEntity.ok(result);
-            
+
         } catch (Exception e) {
-            System.err.println("Error sending OTP: " + e.getMessage());
+            logger.error("Error sending OTP: {}", e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(Map.of(
                     "error", "Failed to send OTP. Please check email configuration.",
@@ -88,9 +89,9 @@ public class AuthController {
             }
             
             return ResponseEntity.ok(result);
-            
+
         } catch (Exception e) {
-            System.err.println("Error verifying OTP: " + e.getMessage());
+            logger.error("Error verifying OTP: {}", e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(Map.of("error", "Failed to verify OTP", "details", e.getMessage()));
         }

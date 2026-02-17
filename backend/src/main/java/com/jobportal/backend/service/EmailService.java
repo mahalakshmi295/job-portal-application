@@ -1,5 +1,7 @@
 package com.jobportal.backend.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -8,10 +10,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmailService {
-    
+
+    private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
+
     @Autowired
     private JavaMailSender mailSender;
-    
+
     @Value("${spring.mail.username}")
     private String fromEmail;
     
@@ -32,9 +36,9 @@ public class EmailService {
             );
             
             mailSender.send(message);
-            System.out.println("✅ OTP email sent successfully to: " + toEmail);
+            logger.info("✅ OTP email sent successfully to: {}", toEmail);
         } catch (Exception e) {
-            System.err.println("❌ Failed to send OTP email: " + e.getMessage());
+            logger.error("❌ Failed to send OTP email: {}", e.getMessage(), e);
             throw new RuntimeException("Failed to send email. Please check email configuration.", e);
         }
     }
@@ -63,9 +67,9 @@ public class EmailService {
             );
             
             mailSender.send(message);
-            System.out.println("✅ Welcome email sent successfully to: " + toEmail);
+            logger.info("✅ Welcome email sent successfully to: {}", toEmail);
         } catch (Exception e) {
-            System.err.println("⚠️ Failed to send welcome email: " + e.getMessage());
+            logger.warn("⚠️ Failed to send welcome email: {}", e.getMessage());
             // Don't throw exception for welcome email failure
         }
     }

@@ -4,22 +4,27 @@ import com.jobportal.backend.model.Job;
 import com.jobportal.backend.model.User;
 import com.jobportal.backend.repository.JobRepository;
 import com.jobportal.backend.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class DataInitializer {
-    
+
+    private static final Logger logger = LoggerFactory.getLogger(DataInitializer.class);
+
     @Bean
-    CommandLineRunner initDatabase(UserRepository userRepository, JobRepository jobRepository) {
+    CommandLineRunner initDatabase(UserRepository userRepository, JobRepository jobRepository, PasswordEncoder passwordEncoder) {
         return args -> {
-            // Initialize sample users
+            // Initialize sample users with BCrypt hashed passwords
             if (userRepository.count() == 0) {
-                userRepository.save(new User("admin", "admin123", "admin@jobportal.com", "ADMIN"));
-                userRepository.save(new User("recruiter1", "recruiter123", "recruiter@company.com", "RECRUITER"));
-                userRepository.save(new User("candidate1", "candidate123", "candidate@email.com", "CANDIDATE"));
-                System.out.println("✅ Sample users initialized");
+                userRepository.save(new User("admin", passwordEncoder.encode("admin123"), "admin@jobportal.com", "ADMIN"));
+                userRepository.save(new User("recruiter1", passwordEncoder.encode("recruiter123"), "recruiter@company.com", "RECRUITER"));
+                userRepository.save(new User("candidate1", passwordEncoder.encode("candidate123"), "candidate@email.com", "CANDIDATE"));
+                logger.info("✅ Sample users initialized with secure password hashing");
             }
             
             // Initialize sample jobs
@@ -63,14 +68,13 @@ public class DataInitializer {
                     "Seattle, WA",
                     "Cloud Services Ltd"
                 ));
-                
-                System.out.println("✅ Sample jobs initialized");
+
+                logger.info("✅ Sample jobs initialized");
             }
-            
-            System.out.println("🚀 Job Portal Backend is ready!");
-            System.out.println("📊 Database initialized with sample data");
-            System.out.println("🌐 Access H2 Console at: http://localhost:8080/h2-console");
-            System.out.println("💡 API Health Check: http://localhost:8080/api/health");
+
+            logger.info("🚀 Job Portal Backend is ready!");
+            logger.info("📊 Database initialized with sample data");
+            logger.info("💡 API Health Check: http://localhost:8080/api/health");
         };
     }
 }

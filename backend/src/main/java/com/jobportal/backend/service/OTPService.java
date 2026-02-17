@@ -1,5 +1,7 @@
 package com.jobportal.backend.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
@@ -8,6 +10,8 @@ import java.util.Map;
 
 @Service
 public class OTPService {
+
+    private static final Logger logger = LoggerFactory.getLogger(OTPService.class);
     
     private static class OTPData {
         String otp;
@@ -40,7 +44,7 @@ public class OTPService {
         LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(OTP_VALIDITY_MINUTES);
         otpStorage.put(email.toLowerCase(), new OTPData(otp, expiryTime));
         
-        System.out.println("🔑 Generated OTP for " + email + ": " + otp + " (expires at " + expiryTime + ")");
+        logger.info("🔑 Generated OTP for {}: {} (expires at {})", email, otp, expiryTime);
         return otp;
     }
     
@@ -52,35 +56,35 @@ public class OTPService {
         OTPData data = otpStorage.get(emailKey);
         
         if (data == null) {
-            System.out.println("❌ No OTP found for: " + email);
+            logger.debug("❌ No OTP found for: {}", email);
             return false;
         }
-        
+
         // Check if OTP expired
         if (LocalDateTime.now().isAfter(data.expiryTime)) {
-            System.out.println("⏰ OTP expired for: " + email);
+            logger.info("⏰ OTP expired for: {}", email);
             otpStorage.remove(emailKey);
             return false;
         }
-        
+
         // Check attempts
         if (data.attempts >= MAX_ATTEMPTS) {
-            System.out.println("🚫 Max attempts exceeded for: " + email);
+            logger.warn("🚫 Max attempts exceeded for: {}", email);
             otpStorage.remove(emailKey);
             return false;
         }
-        
+
         // Increment attempts
         data.attempts++;
-        
+
         // Verify OTP
         boolean isValid = data.otp.equals(otp);
-        
+
         if (isValid) {
-            System.out.println("✅ OTP verified successfully for: " + email);
+            logger.info("✅ OTP verified successfully for: {}", email);
             otpStorage.remove(emailKey); // Remove after successful verification
         } else {
-            System.out.println("❌ Invalid OTP for: " + email + " (Attempt " + data.attempts + "/" + MAX_ATTEMPTS + ")");
+            logger.info("❌ Invalid OTP for: {} (Attempt {}/{})", email, data.attempts, MAX_ATTEMPTS);
         }
         
         return isValid;
