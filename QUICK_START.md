@@ -36,16 +36,15 @@ If you get error: **"No compiler is provided in this environment"**
 
 ### Option 1: Manual Setup (Recommended for first time)
 
-#### Step 1: Start the Backend
+#### Step 1: Start the Backend (Recommended)
 
-Open a terminal/PowerShell window:
+Open a terminal/PowerShell window and run:
 
 ```powershell
-cd backend
-..\apache-maven-3.9.12\bin\mvn.cmd spring-boot:run
+.\run-backend-v2.ps1
 ```
 
-Wait for the message: **"Started JobPortalBackendApplication"**
+Wait for the message: **"[OK] Job Portal Backend is ready!"**
 
 The backend is now running on: `http://localhost:8080`
 
