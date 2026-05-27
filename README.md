@@ -61,3 +61,21 @@ It provides AI-powered job search, resume analysis, and career guidance features
 ```bash
 git clone https://github.com/your-username/job-portal-application.git
 cd job-portal-application
+
+## Screenshots
+
+### Login Page
+
+![Login Page](screenshots/login-page.png)
+
+### Dashboard Page
+
+![Dashboard Page](screenshots/dashboard-page.png)
+
+### Jobs Page
+
+![Jobs Page](screenshots/jobs-page.png)
+
+### Assistance Page
+
+![Assistance Page](screenshots/assistance-page.png)
