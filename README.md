@@ -66,16 +66,17 @@ cd job-portal-application
 
 ### Login Page
 
-![Login Page](screenshots/login-page.png)
+![Login Page](screenshots/logi.png)
 
 ### Dashboard Page
 
-![Dashboard Page](screenshots/dashboard-page.png)
+![Dashboard Page](screenshots/dash.png)
 
 ### Jobs Page
 
-![Jobs Page](screenshots/jobs-page.png)
+![Jobs Page](screenshots/jobs.png)
 
 ### Assistance Page
 
-![Assistance Page](screenshots/assistance-page.png)
+![Assistance Page](screenshots/assis.png)
+
